@@ -7,9 +7,10 @@ flag() {
 }
 if ! flag local; then
 	npm ci
-	alias tsc="npx tsc"
+	npx tsc
+else
+	tsc
 fi
-tsc
 node dist/pug.js
 sass --no-source-map src/style.scss dist/style.css
 if flag elm; then
