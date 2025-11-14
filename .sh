@@ -5,15 +5,10 @@ flag() {
 		[[ -e ".flags/$f" ]] || return 1
 	done
 }
-if ! flag local; then
-	npm ci
-	npx tsc
-else
+if flag local; then
 	tsc
-fi
-node dist/pug.js
-sass --no-source-map src/style.scss dist/style.css
-if flag elm; then
+	node dist/pug.js
+	sass --no-source-map src/style.scss dist/style.css
 	mkdir -p src/{bak,tmp}
 	ELM=src/Main.elm
 	TMP=src/tmp/Main.elm
