@@ -44,6 +44,7 @@ body {
 					}
 					td {
 						@include padding($h: calc(1em / 2), $v: false);
+						border-radius: 1em;
 						&#name {
 							.name {
 								font-weight: bold;
