@@ -103,7 +103,7 @@ main =
         , char
             { names =
                 { name = "Morrigan"
-                , pro = "M" ++ em 1 omega ++ "r" ++ em 3 schwa ++ "g" ++ em 2 "y" ++ "n"
+                , pro = "M" ++ em 1 omega ++ "r" ++ schwa ++ "g" ++ em 2 "y" ++ "n"
                 }
             , species = "Reaper"
             , sex = "Female"
