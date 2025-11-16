@@ -4452,7 +4452,7 @@ var $elm$html$Html$td = _VirtualDom_node('td');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$tr = _VirtualDom_node('tr');
-var $author$project$Main$char = function (character) {
+var $author$project$Pre$char = function (character) {
 	return A2(
 		$elm$html$Html$tr,
 		_List_fromArray(
@@ -4519,49 +4519,49 @@ var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
 };
 var $elm$core$Char$fromCode = _Char_fromCode;
-var $author$project$Main$uni = function (n) {
+var $author$project$Pre$uni = function (n) {
 	return $elm$core$String$fromChar(
 		$elm$core$Char$fromCode(n));
 };
-var $author$project$Main$acute = function (c) {
+var $author$project$Pre$acute = function (c) {
 	return _Utils_ap(
 		c,
-		$author$project$Main$uni(769));
+		$author$project$Pre$uni(769));
 };
-var $author$project$Main$grave = function (c) {
+var $author$project$Pre$grave = function (c) {
 	return _Utils_ap(
 		c,
-		$author$project$Main$uni(768));
+		$author$project$Pre$uni(768));
 };
-var $author$project$Main$macron = function (c) {
+var $author$project$Pre$macron = function (c) {
 	return _Utils_ap(
 		c,
-		$author$project$Main$uni(772));
+		$author$project$Pre$uni(772));
 };
-var $author$project$Main$em = F2(
+var $author$project$Pre$em = F2(
 	function (n, c) {
 		switch (n) {
 			case 1:
-				return $author$project$Main$acute(c);
+				return $author$project$Pre$acute(c);
 			case 2:
-				return $author$project$Main$grave(c);
+				return $author$project$Pre$grave(c);
 			case 3:
-				return $author$project$Main$macron(c);
+				return $author$project$Pre$macron(c);
 			default:
 				return c;
 		}
 	});
-var $author$project$Main$dot = $author$project$Main$uni(183);
-var $author$project$Main$group = F3(
+var $author$project$Pre$dot = $author$project$Pre$uni(183);
+var $author$project$Pre$group = F3(
 	function (n, a, b) {
 		return '[' + (A2(
 			$elm$core$String$join,
-			(n > 0) ? A2($author$project$Main$em, n, $author$project$Main$dot) : $author$project$Main$dot,
+			(n > 0) ? A2($author$project$Pre$em, n, $author$project$Pre$dot) : $author$project$Pre$dot,
 			_List_fromArray(
 				[a, b])) + ']');
 	});
-var $author$project$Main$omega = $author$project$Main$uni(969);
-var $author$project$Main$schwa = $author$project$Main$uni(601);
+var $author$project$Pre$omega = $author$project$Pre$uni(969);
+var $author$project$Pre$schwa = $author$project$Pre$uni(601);
 var $elm$html$Html$table = _VirtualDom_node('table');
 var $elm$html$Html$th = _VirtualDom_node('th');
 var $author$project$Main$main = A2(
@@ -4599,22 +4599,22 @@ var $author$project$Main$main = A2(
 							$elm$html$Html$text('Extra')
 						]))
 				])),
-			$author$project$Main$char(
+			$author$project$Pre$char(
 			{
 				extra: 'Shapeshifts into a large, black Wolf',
 				names: {
 					name: 'Hound',
-					pro: 'H' + (A3($author$project$Main$group, 0, 'a', 'u') + ('n' + 'd'))
+					pro: 'H' + (A3($author$project$Pre$group, 0, 'a', 'u') + ('n' + 'd'))
 				},
 				sex: 'Female',
 				species: 'Changeling'
 			}),
-			$author$project$Main$char(
+			$author$project$Pre$char(
 			{
 				extra: 'Wields a scythe',
 				names: {
 					name: 'Morrigan',
-					pro: 'M' + (A2($author$project$Main$em, 1, $author$project$Main$omega) + ('r' + (A2($author$project$Main$em, 3, $author$project$Main$schwa) + ('g' + (A2($author$project$Main$em, 2, 'y') + 'n')))))
+					pro: 'M' + (A2($author$project$Pre$em, 1, $author$project$Pre$omega) + ('r' + ($author$project$Pre$schwa + ('g' + (A2($author$project$Pre$em, 2, 'y') + 'n')))))
 				},
 				sex: 'Female',
 				species: 'Reaper'

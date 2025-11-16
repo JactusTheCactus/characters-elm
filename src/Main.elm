@@ -1,11 +1,8 @@
 module Main exposing (main)
-
 import Array exposing (..)
 import Html exposing (table, text, th, tr)
 import Html.Attributes exposing (id)
 import Pre exposing (..)
-
-
 main : Html.Html msg
 main =
     table [ id "characters" ]

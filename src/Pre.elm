@@ -1,84 +1,53 @@
 module Pre exposing (..)
-
 import Html exposing (br, code, span, td, text, tr)
 import Html.Attributes exposing (attribute, class, id)
-
-
 uni : Int -> String
 uni n =
     String.fromChar (Char.fromCode n)
-
-
 dot : String
 dot =
     uni 0xB7
-
-
 acute : String -> String
 acute =
-    \c -> c ++ uni 0x0301
-
-
+    \c -> c ++ uni 0x301
 grave : String -> String
 grave =
-    \c -> c ++ uni 0x0300
-
-
+    \c -> c ++ uni 0x300
 macron : String -> String
 macron =
-    \c -> c ++ uni 0x0304
-
-
-
+    \c -> c ++ uni 0x304
 --umlaut:String->String
 --umlaut=\c->c++uni(0x308)
-
-
 omega : String
 omega =
-    uni 0x03C9
-
-
+    uni 0x3C9
 schwa : String
 schwa =
-    uni 0x0259
-
-
-
+    uni 0x259
 --ethel:String
 --ethel=uni(0x153)
-
-
 em : Int -> String -> String
 em n c =
     case n of
         1 ->
             acute c
-
         2 ->
             grave c
-
         3 ->
             macron c
-
         _ ->
             c
-
-
 group : Int -> String -> String -> String
 group n a b =
     "["
         ++ String.join
             (if n > 0 then
                 em n dot
-
              else
                 dot
             )
             [ a, b ]
         ++ "]"
-
-
 char :
     { character
         | names :
