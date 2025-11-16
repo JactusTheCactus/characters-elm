@@ -1,26 +1,43 @@
-$fonts: "Noto+Sans:ital,wght@0,100..900;1,100..900"
-	"Noto+Sans+Mono:wght@100..900" "Fira+Code:wght@300..700";
-@each$font in$fonts {
+$fonts: (
+	"Noto+Serif:ital,wght@0,100..900;1,100..900",
+	"Noto+Sans:ital,wght@0,100..900;1,100..900",
+	"Noto+Sans+Mono:wght@100..900",
+	"Fira+Code:wght@300..700"
+);
+@each $font in $fonts {
 	@import url("https://fonts.googleapis.com/css2?family=#{$font}&display=swap");
 }
 @mixin padding($h: null, $v: null, $t: null, $b: null, $l: null, $r: null) {
 	@if $h != false {
 		@if $l != false {
-			padding-left: $l or$h or 0;
+			padding-left: if($l != null, $l, if($h != null, $h, 0));
 		}
 		@if $r != false {
-			padding-right: $r or$h or 0;
+			padding-right: if($r != null, $r, if($h != null, $h, 0));
 		}
 	}
 	@if $v != false {
 		@if $t != false {
-			padding-top: $t or$v or 0;
+			padding-top: if($t != null, $t, if($v != null, $v, 0));
 		}
 		@if $b != false {
-			padding-bottom: $b or$v or 0;
+			padding-bottom: if($b != null, $b, if($v != null, $v, 0));
 		}
 	}
 }
+@mixin wrap($pre: "", $post: "") {
+	@each $pos, $v in (before: $pre, after: $post) {
+		@if $v != "" {
+			&::#{$pos} {
+				content: $v;
+			}
+		}
+	}
+}
+@function bgColour($colour) {
+	@return calc($colour * 3 / 4);
+}
+$serif: "Noto Serif", serif;
 $sans: "Noto Sans", sans-serif;
 $mono: "Fira Code", "Noto Sans Mono", monospace;
 body {
@@ -34,26 +51,52 @@ body {
 					text-decoration: underline;
 				}
 				&.character {
-					&[sex^="M"] {
+					&[data-sex^="m"] {
 						color: blue;
-						background-color: #ddf;
+						background-color: rgb(
+							bgColour(255),
+							bgColour(255),
+							255
+						);
+						.name::after {
+							content: "\2642";
+						}
 					}
-					&[sex^="F"] {
+					&[data-sex^="f"] {
 						color: red;
-						background-color: #fdd;
+						background-color: rgb(
+							255,
+							bgColour(255),
+							bgColour(255)
+						);
+						.name::after {
+							content: "\2640";
+						}
+					}
+					&:not([data-sex^="m"]):not([data-sex^="f"]) {
+						color: green;
+						background-color: rgb(
+							bgColour(255),
+							255,
+							bgColour(255)
+						);
+						.name::after {
+							content: "\26a5";
+						}
 					}
 					td {
 						@include padding($h: calc(1em / 2), $v: false);
 						border-radius: calc(1em / pow(2, 2));
-						&#name {
+						&.names {
 							.name {
 								font-weight: bold;
 							}
-							.pro {
-								font-family: $mono;
+							.pronunciation {
+								font-family: $sans;
+								@include wrap("<", ">");
 							}
 						}
-						&#extra {
+						&.extra {
 							text-align: justify;
 						}
 					}

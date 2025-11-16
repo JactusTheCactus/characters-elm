@@ -1,83 +1,139 @@
-module Pre exposing (..)
-import Html exposing (br, code, span, td, text, tr)
+module Pre exposing (Character, char, em, group, omega, schwa)
+import Char exposing (fromCode)
+import Html exposing (Html, br, span, td, text, tr)
 import Html.Attributes exposing (attribute, class, id)
+import List exposing (map, singleton)
+import String exposing (dropLeft, fromChar, join, left, toLower, toUpper, words)
 uni : Int -> String
 uni n =
-    String.fromChar (Char.fromCode n)
-dot : String
-dot =
-    uni 0xB7
-acute : String -> String
+    n
+        |> fromCode
+        |> fromChar
+acute : String
 acute =
-    \c -> c ++ uni 0x301
-grave : String -> String
+    uni 0x301
+grave : String
 grave =
-    \c -> c ++ uni 0x300
-macron : String -> String
-macron =
-    \c -> c ++ uni 0x304
---umlaut:String->String
---umlaut=\c->c++uni(0x308)
+    uni 0x300
+hacek : String
+hacek =
+    uni 0x30C
 omega : String
 omega =
     uni 0x3C9
 schwa : String
 schwa =
     uni 0x259
---ethel:String
---ethel=uni(0x153)
 em : Int -> String -> String
 em n c =
-    case n of
-        1 ->
-            acute c
-        2 ->
-            grave c
-        3 ->
-            macron c
-        _ ->
-            c
-group : Int -> String -> String -> String
-group n a b =
+    c
+        ++ (case n of
+                1 ->
+                    acute
+                2 ->
+                    grave
+                3 ->
+                    hacek
+                _ ->
+                    ""
+           )
+group : Int -> List String -> String
+group n list =
     "["
-        ++ String.join
-            (if n > 0 then
-                em n dot
-             else
-                dot
-            )
-            [ a, b ]
+        ++ (list
+                |> join
+                    (if n > 0 then
+                        "-"
+                            |> em n
+                     else
+                        "-"
+                    )
+           )
         ++ "]"
-char :
-    { character
-        | names :
-            { name : String
-            , pro : String
-            }
-        , species : String
-        , sex : String
-        , extra : String
+capitalize : String -> String
+capitalize str =
+    str
+        |> words
+        |> map
+            (\s ->
+                [ s
+                    |> left 1
+                    |> toUpper
+                , s
+                    |> dropLeft 1
+                    |> toLower
+                ]
+                    |> join ""
+            )
+        |> join " "
+type alias Character =
+    { names :
+        { name : String
+        , pronunciation : String
+        }
+    , species : String
+    , sex : String
+    , extra : String
     }
-    -> Html.Html msg
+char : Character -> Html msg
 char character =
     tr
-        [ class "character"
-        , attribute "sex" character.sex
+        [ "character"
+            |> class
+        , character.sex
+            |> toLower
+            |> attribute "data-sex"
+        , character.names.name
+            |> words
+            |> join "-"
+            |> toLower
+            |> id
         ]
         [ td
-            [ id "name" ]
-            [ span
-                [ class "name" ]
-                [ text character.names.name ]
-            , br [] []
-            , code
-                [ class "pro" ]
-                [ text ("<" ++ character.names.pro ++ ">") ]
+            ("names"
+                |> class
+                |> singleton
+            )
+            [ (character.names.name
+                |> capitalize
+                |> text
+                |> singleton
+              )
+                |> span
+                    ("name"
+                        |> class
+                        |> singleton
+                    )
+            , []
+                |> br []
+            , (character.names.pronunciation
+                |> capitalize
+                |> text
+                |> singleton
+              )
+                |> span
+                    ("pronunciation"
+                        |> class
+                        |> singleton
+                    )
             ]
-        , td
-            [ id "species" ]
-            [ text character.species ]
-        , td
-            [ id "extra" ]
-            [ text character.extra ]
+        , (character.species
+            |> capitalize
+            |> text
+            |> singleton
+          )
+            |> td
+                ("species"
+                    |> class
+                    |> singleton
+                )
+        , (character.extra
+            |> text
+            |> singleton
+          )
+            |> td
+                ("extra"
+                    |> class
+                    |> singleton
+                )
         ]
