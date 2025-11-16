@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# TODO:
+# FIGURE OUT SORTING ARRAYS
 contains() {
 	local ITEM=$1; shift
 	local i
@@ -14,6 +16,7 @@ for f in src/*; do
 		EXTENSIONS+=("$f")
 	fi
 done
+# SORT ${EXTENSIONS[@]}
 exec > elm.md
 echo "# Thoughts?"
 for EXT in "${EXTENSIONS[@]}"; do
@@ -22,6 +25,7 @@ for EXT in "${EXTENSIONS[@]}"; do
 	for i in src/*.$EXT; do
 		FILES+=("$i")
 	done
+	# SORT ${FILES[@]}
 	for i in "${FILES[@]}"; do
 		FILE="$i"
 		echo "### ${FILE#src}"
