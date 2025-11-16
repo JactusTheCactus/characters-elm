@@ -28,7 +28,7 @@ for EXT in "${EXTENSIONS[@]}"; do
 	# SORT ${FILES[@]}
 	for i in "${FILES[@]}"; do
 		FILE="$i"
-		echo "### ${FILE#src}"
+		echo "### \`${FILE#src}\`"
 		echo "\`\`\`$EXT"
 		cat "$FILE"
 		echo "\`\`\`"
