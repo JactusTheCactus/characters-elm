@@ -13,7 +13,7 @@ data =
                 [ "m"
                 , omega |> em 1
                 , "r"
-                , schwa |> em 3
+                , schwa
                 , "g"
                 , "y" |> em 2
                 , "n"
@@ -28,7 +28,7 @@ data =
             { name = "hound"
             , pronunciation =
                 [ "h"
-                , [ "a", "u" ] |> group 1
+                , [ "a", "u" |> group 0
                 , "n"
                 , "d"
                 ]
